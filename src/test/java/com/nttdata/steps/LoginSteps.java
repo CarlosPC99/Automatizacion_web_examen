@@ -48,11 +48,17 @@ public class LoginSteps {
         this.driver.findElement(LoginPage.loginButton).click();
     }
 
+    public void btnIngreso(){
+        this.driver.findElement(LoginPage.btnIngresoLogin).click();
+    }
 
     public void ingresoUsuarioYClave(String user, String password) {
+        btnIngreso();
+        esperaImplicita();
         typeUser(user);
         typePassword(password);
         esperaImplicita();
         login();
+        esperaImplicita();
     }
 }

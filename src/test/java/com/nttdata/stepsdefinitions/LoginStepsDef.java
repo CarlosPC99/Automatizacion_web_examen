@@ -1,5 +1,6 @@
 package com.nttdata.stepsdefinitions;
 
+import com.nttdata.steps.AgregarAlCarritoSteps;
 import com.nttdata.steps.LoginSteps;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -13,38 +14,51 @@ import static com.nttdata.funtions.FuncionManager.*;
 public class LoginStepsDef {
     private WebDriver driver;
 
-//    private InventorySteps inventorySteps(WebDriver driver){
-//        return new InventorySteps(driver);
-//    }
-
-    @Dado("que me encuentro en la página de login de Saucedemo")
-    public void que_me_encuentro_en_la_página_de_login_de_sacedemo() {
+    @Dado("que estoy en la página de la tienda")
+    public void que_estoy_en_la_pagina_de_la_tienda() {
         driver = getDriver();
-        driver.get("https://www.saucedemo.com/");
+        driver.get("https://qalab.bensg.com/store/es/");
         screenShot();
+
     }
-    @Cuando("inicio sesión con las credenciales usuario: {string} y contraseña: {string}")
-    public void inicio_sesión_con_las_credenciales_usuario_y_contraseña(String user, String password) {
+
+    @Y("me logueo con mi usuario: {string} y clave: {string}")
+    public void me_logueo_con_mi_usuario_y_clave(String user, String password) {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.ingresoUsuarioYClave(user,password);
         screenShot();
     }
-        @Entonces("todo ok")
-    public void todo_ok() {
-        System.out.print("TODO OK :)");
+
+
+    @Cuando("navego a la categoria Clothes y subcategoria Men")
+    public void navego_a_la_categoria_clothes_y_subcategoria_men(){
+        AgregarAlCarritoSteps agregarAlCarritoSteps = new AgregarAlCarritoSteps(driver);
+        agregarAlCarritoSteps.ingresarSeleccionClothes();
+        screenShot();
     }
-//    @Entonces("valido que debería aparecer el título de {string}")
-//    public void valido_que_debería_aparecer_el_título_de(String expectedTitle) {
-//        String title =  inventorySteps(driver).getTitle();
-//        //prueba: validamos el título del producto
-//        Assertions.assertEquals(expectedTitle, title);
+
+    @Y("agrego 2 unidades del primer producto al carrito")
+    public void agrego_dos_unidades_del_primer_producto_al_carrito(){
+        AgregarAlCarritoSteps agregarAlCarritoSteps = new AgregarAlCarritoSteps(driver);
+        agregarAlCarritoSteps.agregarAlCarrito();
+        screenShot();
+    }
+    @Entonces("valido en el popup la confirmación del producto agregado")
+    public void valido_en_el_popup_la_confirmacion_del_producto_agregado() {
+        AgregarAlCarritoSteps agregarAlCarritoSteps = new AgregarAlCarritoSteps(driver);
+        agregarAlCarritoSteps.validarLblAddCheck();
+        screenShot();
+    }
+    @Y("valido en el popup que el monto total sea calculado correctamente")
+    public void valido_en_el_popup_que_el_monto_total_sea_calculado_correctamente(){
+        AgregarAlCarritoSteps agregarAlCarritoSteps = new AgregarAlCarritoSteps(driver);
+        agregarAlCarritoSteps.validarLblAddMonto();
+        screenShot();
+    }
+
+//    @Entonces("todo ok")
+//    public void todo_ok() {
+//        System.out.print("TODO OK :) \n");
 //    }
-//    @Y("también valido que al menos exista un item")
-//    public void también_valido_que_al_menos_exista_un_item() {
-//        int itemsListSize = inventorySteps(driver).getItemSize();
-//        //prueba: validar que al menos exista un item
-//        Assertions.assertTrue(itemsListSize > 0, "El tamaño de la lista es: " + itemsListSize);
-//        esperaImplicita();
-//        screenShot();
-//    }
+
 }

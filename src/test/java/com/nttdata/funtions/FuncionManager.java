@@ -47,7 +47,8 @@ public class FuncionManager {
 
     @After
     public void quitDriver() {
-        driver.quit();
+        //driver.quit();
+        System.out.print("salir driver");
     }
 
     public static void screenShot() {
