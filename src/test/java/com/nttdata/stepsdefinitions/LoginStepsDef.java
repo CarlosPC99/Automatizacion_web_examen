@@ -1,6 +1,8 @@
 package com.nttdata.stepsdefinitions;
 
+import com.nttdata.page.FinalizarCompraPage;
 import com.nttdata.steps.AgregarAlCarritoSteps;
+import com.nttdata.steps.FinalizarCompraSteps;
 import com.nttdata.steps.LoginSteps;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -53,6 +55,12 @@ public class LoginStepsDef {
     public void valido_en_el_popup_que_el_monto_total_sea_calculado_correctamente(){
         AgregarAlCarritoSteps agregarAlCarritoSteps = new AgregarAlCarritoSteps(driver);
         agregarAlCarritoSteps.validarLblAddMonto();
+        screenShot();
+    }
+    @Cuando("finalizo la compra")
+    public void finalizo_la_compra(){
+        FinalizarCompraSteps finalizarCompraSteps = new FinalizarCompraSteps(driver);
+        finalizarCompraSteps.btnPresionarFinalizar();
         screenShot();
     }
 
